@@ -7,7 +7,7 @@ export const Navbar = () => {
     const { setParams } = useContext(DataContext);
 
     return (
-        <div className="grid gap-6  md:gap-0 md:flex justify-between m-6">
+        <div className="grid gap-6 overflow-hidden md:gap-0 md:flex justify-between m-6">
             <div className="flex gap-2">
                 <span className="flex justify-center my-1 ">{<BookOpen size={30} />}</span>
                 <h1 className="text-3xl font-bold">Durvesh Anivault</h1>
