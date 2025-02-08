@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataProvider";
 
 const Login = () => {
-    const [email, setEmail] = useState("hello");
-    const [password, setPassword] = useState("bye");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const {setIsLoggedIn} = useContext(DataContext)
@@ -27,7 +27,7 @@ const Login = () => {
 
             if(response){
                 setIsLoggedIn(true);
-                navigate('/admin');
+                navigate('/add-search');
             }
         } catch(error){
             console.log("Invalid credentials", error);

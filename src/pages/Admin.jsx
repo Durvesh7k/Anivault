@@ -1,6 +1,6 @@
 import { Plus } from 'lucide-react';
 import { useContext, useEffect, useState } from 'react';
-import { databases } from '../lib/appwrite';
+import { bucket_id, collection_id, databases, project_name_id } from '../lib/appwrite';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../context/DataProvider'
 import { Account, Storage, ID } from 'appwrite';
@@ -12,9 +12,6 @@ const Admin = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const BUCKET_ID = import.meta.env.VITE_APPWRITE_BUCKET_ID;
-    const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
-    const PROJECT_NAME_ID = import.meta.env.VITE_APPWRITE_PROJECT_NAME_ID;
 
     const { isLoggedIn, setIsLoggedIn } = useContext(DataContext);
 
@@ -22,12 +19,12 @@ const Admin = () => {
         try {
             const storage = new Storage(client);
             const response = await storage.createFile(
-                BUCKET_ID,
+                bucket_id,
                 ID.unique(),
                 e.target.files[0],
             )
             const image_url = storage.getFileView(
-                BUCKET_ID,
+                bucket_id,
                 response.$id,
             )
 
@@ -53,7 +50,7 @@ const Admin = () => {
         }
 
         checkUser();
-    }, []);
+    }, [setIsLoggedIn]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -61,8 +58,8 @@ const Admin = () => {
 
         try {
             await databases.createDocument(
-                PROJECT_NAME_ID,
-                COLLECTION_ID,
+                project_name_id,
+                collection_id,
                 ID.unique(),
                 {
                     title: title,
@@ -84,6 +81,7 @@ const Admin = () => {
                 <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-2xl p-6">
                     <div className="flex items-center space-x-2 mb-6">
                         <Plus className="h-6 w-6 text-gray-600" />
+                        <h2 className="text-2xl font-bold text-gray-800">Add New Anime</h2>
                         <h2 className="text-2xl font-bold text-gray-800">Add New Anime</h2>
                     </div>
                     <form onSubmit={handleSubmit} className="space-y-4">

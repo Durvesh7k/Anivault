@@ -1,19 +1,18 @@
 import { useParams } from "react-router-dom"
-import { databases } from "../lib/appwrite";
+import { collection_id, databases, project_name_id } from "../lib/appwrite";
 import { useEffect, useState } from "react";
+import Loading from "../components/Loading";
 
 const AnimeDetails = () => {
     const { id } = useParams();
     const [anime, setAnime] = useState(null);
-    const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
-    const PROJECT_NAME_ID = import.meta.env.VITE_APPWRITE_PROJECT_NAME_ID;
 
     useEffect(() => {
         const fetchAnimeDetails = async () => {
             try {
                 const response = await databases.getDocument(
-                    PROJECT_NAME_ID,
-                    COLLECTION_ID,
+                    project_name_id,
+                    collection_id,
                     id,
                 )
                 setAnime(response);
@@ -48,7 +47,9 @@ const AnimeDetails = () => {
                         {anime.description.length > 950 ? anime.description.substring(950, anime.description.length) : ""}
                     </p>
                 </div> :
-                <p className="text-center text-lg text-gray-500">Loading anime Details...</p>
+                <div className="h-screen">
+                    <Loading message="Loading anime Details" />
+                </div>
             }
         </div>
     )

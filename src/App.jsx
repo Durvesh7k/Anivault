@@ -6,6 +6,7 @@ import { Navbar } from './components/Navbar'
 import Login from "./pages/Login";
 import DataProvider from "./context/DataProvider";
 import Admin from "./pages/Admin";
+import AddBySearch from "./pages/AddBySearch";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/anime/:id" element={<AnimeDetails />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/add-search" element={<AddBySearch />} />
         </Routes>
       </Router>
     </DataProvider>
