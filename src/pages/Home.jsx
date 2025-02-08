@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { DataContext } from "../context/DataProvider";
 import Loading from "../components/Loading";
 
-
 export const Home = () => {
     const [animeList, setAnimeList] = useState([]);
     const { params } = useContext(DataContext);
@@ -27,25 +26,28 @@ export const Home = () => {
         fetchAnimeList();
     }, []);
 
+    const filteredAnimeList = animeList.filter(anime => anime.title.match(new RegExp(params, "i")));
 
     return (
         <div className="p-8">
+            <h2 className="text-sm text-gray-600 font-semibold mb-4">
+                All ({filteredAnimeList.length})
+            </h2>
             <div className="anime-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {animeList.length > 0 ? (
-                    animeList
-                        .filter(anime => anime.title.match(new RegExp(params, "i")))
-                        .map((anime) => (
-                            <Link to={`/anime/${anime.$id}`} key={anime.$id} >
-                                <AnimeCard anime={anime} />
-                            </Link>
-                        ))
+                {filteredAnimeList.length > 0 ? (
+                    filteredAnimeList.map((anime) => (
+                        <Link to={`/anime/${anime.$id}`} key={anime.$id}>
+                            <AnimeCard anime={anime} />
+                        </Link>
+                    ))
                 ) : (
                     <div className="flex justify-center items-center">
                         <Loading message="Loading Anime List..." />
                     </div>
                 )}
             </div>
-        </div>)
-}
+        </div>
+    );
+};
 
-export default Home
+export default Home;

@@ -7,6 +7,7 @@ import { bucket_id, client, collection_id, databases, project_name_id } from '..
 import { ID, Account, Storage } from 'appwrite';
 import Loading from '../components/Loading'
 
+
 function AddBySearch() {
     const [searchTerm, setSearchTerm] = useState('');
     const [animes, setAnimes] = useState([]);
@@ -42,12 +43,11 @@ function AddBySearch() {
         try {
             const response = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(searchTerm)}`);
             const data = await response.json();
-            setSearchLoading(false);
             setAnimes(data.data);
         } catch (error) {
             console.error('Error fetching anime:', error);
         } finally {
-            searchLoading(false);
+            setSearchLoading(false);
         }
     };
 
@@ -72,7 +72,7 @@ function AddBySearch() {
                 collection_id,
                 ID.unique(),
                 {
-                    title: anime.title,
+                    title: anime.title_english,
                     description: anime.synopsis,
                     image_url: image_url
                 }
@@ -122,12 +122,12 @@ function AddBySearch() {
                             >
                                 <img
                                     src={anime.images.jpg.image_url}
-                                    alt={anime.title}
+                                    alt={anime.title_english}
                                     className="w-full h-64 object-cover"
                                 />
                                 <div className="p-4">
                                     <div className="flex justify-between items-start mb-2">
-                                        <h2 className="text-xl font-semibold text-gray-800 flex-1">{anime.title}</h2>
+                                        <h2 className="text-xl font-semibold text-gray-800 flex-1">{anime.title_english}</h2>
                                         <button
                                             onClick={() => addToList(anime)}
                                             className='bg-indigo-100 rounded-3xl h-8 w-8 flex items-center justify-center cursor-pointer text-indigo-600 hover:bg-indigo-200'
