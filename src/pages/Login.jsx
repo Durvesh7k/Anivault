@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
-import { client } from "../lib/appwrite"
-import { Account } from "appwrite";
 import { useNavigate } from "react-router-dom";
 import { DataContext } from "../context/DataProvider";
+import {account} from '../lib/appwrite';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -15,14 +14,6 @@ const Login = () => {
         e.preventDefault();
 
         try{
-            const account = new Account(client);
-            const user = await account.get();
-
-            if(user){
-                setIsLoggedIn(true);
-                navigate('/admin');
-            }
-
             const response = await account.createEmailPasswordSession(email, password);
 
             if(response){

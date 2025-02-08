@@ -76,7 +76,7 @@ export const Home = () => {
             {showScrollButton && (
                 <button
                     onClick={scrollToTop}
-                    className="fixed cursor-pointer bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 flex items-center gap-2"
+                    className="fixed animate-bounce cursor-pointer bottom-8 right-8 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-full shadow-lg transition-all duration-300 flex items-center gap-2"
                     aria-label="Back to top"
                 >
                     <span className="text-sm font-medium">Back to Top</span>
