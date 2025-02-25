@@ -14,12 +14,13 @@ const App = () => {
       <div className="relative w-full h-screen">
         {/* Background Video */}
         <video
-          className="fixed top-0 w-full h-full left-0 object-cover"
+          className="fixed top-0 w-full h-full left-0 object-cover z-[-1]"
           autoPlay
           loop
           playsInline
+          muted
         >
-          <source src="/videos/zoro.mp4" type="video/mp4" />
+          <source src="/videos/zoro.mp4"type="video/mp4" />
         </video>
 
         <div className="absolute top-0 left-0 bg-black bg-opacity-50"></div>
