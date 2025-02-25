@@ -25,7 +25,7 @@ const AnimeDetails = () => {
     }, [id]);
 
     return (
-        <div className="p-3 mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="p-3 mx-auto rounded-lg shadow-md overflow-hidden">
             {anime ?
                 <div>
                     <div className="grid grid-cols-1 gap-4 p-2 md:p-0 md:gap-0 md:grid-cols-2">
@@ -37,13 +37,13 @@ const AnimeDetails = () => {
                             />
                         </div>
                         <div>
-                            <h1 className="text-3xl font-bold text-gray-800 mb-4">{anime.title}</h1>
-                            <p className="text-gray-600 text-justify text-lg leading-relaxed whitespace-pre-line">
+                            <h1 className="text-3xl font-bold text-white mb-4">{anime.title}</h1>
+                            <p className="text-white text-justify text-lg leading-relaxed whitespace-pre-line">
                                 {anime.description.length > 950 ? anime.description.substring(0, 950) : anime.description}
                             </p>
                         </div>
                     </div>
-                    <p className="text-gray-600 p-2 md:p-6 text-justify text-lg leading-relaxed whitespace-pre-line">
+                    <p className="text-white p-2 md:p-6 text-justify text-lg leading-relaxed whitespace-pre-line">
                         {anime.description.length > 950 ? anime.description.substring(950, anime.description.length) : ""}
                     </p>
                 </div> :
